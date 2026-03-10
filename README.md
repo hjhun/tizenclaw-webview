@@ -73,12 +73,12 @@ You can launch the application directly from the sdb shell using the standard ti
 sdb shell app_launcher -s org.tizen.tizenclaw-webview
 ```
 
-### Launching via AppControl (with a specific UI)
-To launch the WebView and immediately navigate to a specific website, you can use the `app_com_tool` to send an AppControl request containing the desired URI:
+### Launching with a Specific URI
+To launch the WebView and immediately navigate to a specific website, use the `app_launcher` command and pass the URI via the `__APP_SVC_URI__` argument:
 
 ```bash
 # Example: Launch and navigate to Google
-sdb shell app_com_tool -a org.tizen.tizenclaw-webview -u "https://google.com"
+sdb shell app_launcher -s org.tizen.tizenclaw-webview __APP_SVC_URI__ "https://google.com"
 ```
 
 ## Application Architecture
