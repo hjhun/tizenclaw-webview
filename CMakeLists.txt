@@ -71,6 +71,7 @@ INSTALL(TARGETS ${TARGET_WEBVIEW}
 
 # Install action JSON to /usr/apps
 INSTALL(FILES res/open_url.action
+              res/open_dashboard.action
         DESTINATION /usr/apps/org.tizen.tizenclaw-webview/res)
 
 # Install manifest XML to /usr/share/packages
