@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns="http://tizen.org/ns/packages" api-version="10.0" package="org.tizen.tizenclew-webview" version="1.0.0">
+<manifest xmlns="http://tizen.org/ns/packages" api-version="10.0" package="org.tizen.tizenclaw-webview" version="1.0.0">
     <label>TizenClaw Webview</label>
     <description>TizenClaw Webview App</description>
-    <ui-application appid="org.tizen.tizenclew-webview" exec="tizenclaw-webview" nodisplay="false" multiple="false" type="capp" taskmanage="true">
+    <ui-application appid="org.tizen.tizenclaw-webview" exec="tizenclaw-webview" nodisplay="false" multiple="false" type="capp" taskmanage="true">
         <label>TizenClaw Webview</label>
         <splashes>
         </splashes>

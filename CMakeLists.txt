@@ -67,8 +67,8 @@ TARGET_LINK_LIBRARIES(${TARGET_WEBVIEW} PRIVATE
 
 # Install executable to /usr/apps
 INSTALL(TARGETS ${TARGET_WEBVIEW}
-        DESTINATION /usr/apps/org.tizen.tizenclew-webview/bin)
+        DESTINATION /usr/apps/org.tizen.tizenclaw-webview/bin)
 
 # Install manifest XML to /usr/share/packages
-INSTALL(FILES packaging/org.tizen.tizenclew-webview.xml
+INSTALL(FILES packaging/org.tizen.tizenclaw-webview.xml
         DESTINATION share/packages)
