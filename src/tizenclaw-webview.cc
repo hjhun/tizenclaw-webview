@@ -103,7 +103,7 @@ static void app_control(app_control_h app_control, void *data) {
   /* Handle the launch request. */
   char *uri = nullptr;
   char *extra_url = nullptr;
-  char *operation = nullptr;
+  char *action_name = nullptr;
   AppData *ad = static_cast<AppData *>(data);
 
   if (app_control_get_uri(app_control, &uri) == APP_CONTROL_ERROR_NONE &&
@@ -120,13 +120,13 @@ static void app_control(app_control_h app_control, void *data) {
       ewk_view_url_set(ad->web_view, extra_url);
     }
     free(extra_url);
-  } else if (app_control_get_operation(app_control, &operation) == APP_CONTROL_ERROR_NONE &&
-             operation != nullptr && strcmp(operation, "http://tizen.org/appcontrol/operation/openDashboard") == 0) {
-    dlog_print(DLOG_INFO, LOG_TAG, "Received openDashboard operation, defaulting to http://localhost:9090");
+  } else if (app_control_get_extra_data(app_control, "__K_ACTION_NAME", &action_name) == APP_CONTROL_ERROR_NONE &&
+             action_name != nullptr && strcmp(action_name, "openDashboard") == 0) {
+    dlog_print(DLOG_INFO, LOG_TAG, "Received openDashboard action name via __K_ACTION_NAME, defaulting to http://localhost:9090");
     if (ad->web_view) {
       ewk_view_url_set(ad->web_view, "http://localhost:9090");
     }
-    free(operation);
+    free(action_name);
   } else {
     dlog_print(DLOG_INFO, LOG_TAG, "No URI, 'url' extra data, or known operation provided in app_control");
   }
