@@ -89,17 +89,17 @@ static void
 app_control(app_control_h app_control, void *data)
 {
     /* Handle the launch request. */
-    char *url = NULL;
+    char *uri = nullptr;
     appdata_s *ad = static_cast<appdata_s *>(data);
     
-    if (app_control_get_extra_data(app_control, "url", &url) == APP_CONTROL_ERROR_NONE) {
-        dlog_print(DLOG_INFO, LOG_TAG, "Received URL from app_control: %s", url);
-        if (ad->web_view && url) {
-            ewk_view_url_set(ad->web_view, url);
+    if (app_control_get_uri(app_control, &uri) == APP_CONTROL_ERROR_NONE && uri != nullptr) {
+        dlog_print(DLOG_INFO, LOG_TAG, "Received URI from app_control: %s", uri);
+        if (ad->web_view) {
+            ewk_view_url_set(ad->web_view, uri);
         }
-        free(url);
+        free(uri);
     } else {
-        dlog_print(DLOG_INFO, LOG_TAG, "No URL provided in app_control extra data");
+        dlog_print(DLOG_INFO, LOG_TAG, "No URI provided in app_control");
     }
 }
 
