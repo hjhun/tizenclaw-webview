@@ -9,13 +9,17 @@ find_package(PkgConfig REQUIRED)
 
 # Standard Tizen EFL + WebKit + AppControl dependencies
 # elementary, ecore, ecore-evas, eina, evas, ewebkit, capi-appfw-application, capi-appfw-app-control, dlog
+execute_process(COMMAND sh -c "pkg-config --list-all | grep -i web > /tmp/pkg_list.txt; cat /tmp/pkg_list.txt" OUTPUT_VARIABLE PKG_OUT)
+message(STATUS "DEBUG PKG_CONFIG WEB: ${PKG_OUT}")
+execute_process(COMMAND sh -c "pkg-config --list-all | grep -i ewk > /tmp/pkg_ewk.txt; cat /tmp/pkg_ewk.txt" OUTPUT_VARIABLE PKG_OUT2)
+message(STATUS "DEBUG PKG_CONFIG EWK: ${PKG_OUT2}")
+
 pkg_check_modules(PKGS REQUIRED 
     elementary
     ecore
     ecore-evas
     eina
     evas
-    ewebkit
     capi-appfw-application
     capi-appfw-app-control
     dlog
