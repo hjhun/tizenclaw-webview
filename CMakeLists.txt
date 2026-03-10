@@ -20,6 +20,9 @@ pkg_check_modules(PKGS REQUIRED
     ecore-evas
     eina
     evas
+    efl-extension
+    vc-webview
+    capi-system-system-settings
     capi-appfw-application
     capi-appfw-app-control
     dlog
