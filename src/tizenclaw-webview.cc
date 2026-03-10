@@ -102,17 +102,25 @@ static bool app_create(void *data) {
 static void app_control(app_control_h app_control, void *data) {
   /* Handle the launch request. */
   char *uri = nullptr;
+  char *extra_url = nullptr;
   AppData *ad = static_cast<AppData *>(data);
 
   if (app_control_get_uri(app_control, &uri) == APP_CONTROL_ERROR_NONE &&
-      uri != nullptr) {
+      uri != nullptr && uri[0] != '\0') {
     dlog_print(DLOG_INFO, LOG_TAG, "Received URI from app_control: %s", uri);
     if (ad->web_view) {
       ewk_view_url_set(ad->web_view, uri);
     }
     free(uri);
+  } else if (app_control_get_extra_data(app_control, "url", &extra_url) == APP_CONTROL_ERROR_NONE &&
+             extra_url != nullptr && extra_url[0] != '\0') {
+    dlog_print(DLOG_INFO, LOG_TAG, "Received 'url' from app_control extra data: %s", extra_url);
+    if (ad->web_view) {
+      ewk_view_url_set(ad->web_view, extra_url);
+    }
+    free(extra_url);
   } else {
-    dlog_print(DLOG_INFO, LOG_TAG, "No URI provided in app_control");
+    dlog_print(DLOG_INFO, LOG_TAG, "No URI or 'url' extra data provided in app_control");
   }
 }
 
