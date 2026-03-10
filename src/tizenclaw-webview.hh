@@ -26,7 +26,7 @@
 #ifdef  LOG_TAG
 #undef  LOG_TAG
 #endif
-#define LOG_TAG "tizenclaw-webview"
+#define LOG_TAG "TIZENCLAW_WEBVIEW"
 
 #if !defined(PACKAGE)
 #define PACKAGE "org.tizen.tizenclew-webview"
