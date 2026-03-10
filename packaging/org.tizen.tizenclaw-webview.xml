@@ -4,6 +4,7 @@
     <description>TizenClaw Webview App</description>
     <ui-application appid="org.tizen.tizenclaw-webview" exec="tizenclaw-webview" nodisplay="false" multiple="false" type="capp" taskmanage="true">
         <label>TizenClaw Webview</label>
+        <metadata key="http://tizen.org/metadata/action" value="open_url.action" />
         <splashes>
         </splashes>
     </ui-application>

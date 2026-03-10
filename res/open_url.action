@@ -1,0 +1,26 @@
+{
+  "name": "openUrl",
+  "type": "appControl",
+  "category": "utility",
+  "description": "An action to open a URL in TizenClaw WebView",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "url": {
+        "type": "string",
+        "description": "The URL to open"
+      }
+    },
+    "required": ["url"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {}
+  },
+  "requiredPrivileges": [
+    "http://tizen.org/privilege/internet"
+  ],
+  "details": {
+    "appid": "org.tizen.tizenclaw-webview"
+  }
+}

@@ -38,4 +38,5 @@ rm -rf %{buildroot}
 %manifest packaging/tizenclaw-webview.manifest
 %defattr(-,root,root,-)
 /usr/apps/org.tizen.tizenclaw-webview/bin/tizenclaw-webview
+/usr/apps/org.tizen.tizenclaw-webview/res/open_url.action
 /usr/share/packages/org.tizen.tizenclaw-webview.xml
