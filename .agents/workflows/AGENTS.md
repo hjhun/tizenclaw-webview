@@ -38,7 +38,11 @@ This process follows the `deploy_to_emulator.md` workflow.
    - Command: `sdb shell rpm -Uvh --force /tmp/tizenclaw-1.0.0-1.<arch>.rpm`
    - `<arch>` is automatically detected as the `cpu_arch` using `sdb capability` (e.g., `x86_64`, `aarch64`).
 
-4. **Restart Daemon and Check Status**
+4. **Install TPK package for tizenclaw-webview app**
+   - Command: `sdb shell tpk-backend --preload -y org.tizen.tizenclaw-webview`
+   - This command registers the installed TizenClaw WebView application with the Application Framework.
+
+5. **Restart Daemon and Check Status**
    - Command: `sdb shell systemctl daemon-reload`
    - Command: `sdb shell systemctl restart tizenclaw`
    - Command: `sdb shell systemctl status tizenclaw -l`
