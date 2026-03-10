@@ -1,20 +1,28 @@
-cmake_minimum_required(VERSION 3.0)
-project(tizenclaw-webview C)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 
-set(CMAKE_C_STANDARD 99)
-set(CMAKE_C_STANDARD_REQUIRED ON)
+PROJECT(tizenclaw-webview CXX)
 
-# Required packages
-find_package(PkgConfig REQUIRED)
+## Compiler flags
+SET(CMAKE_CXX_STANDARD 20)
+SET(CMAKE_CXX_STANDARD_REQUIRED ON)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -fPIC")
 
-# Standard Tizen EFL + WebKit + AppControl dependencies
-# elementary, ecore, ecore-evas, eina, evas, ewebkit, capi-appfw-application, capi-appfw-app-control, dlog
-execute_process(COMMAND sh -c "pkg-config --list-all | grep -i web > /tmp/pkg_list.txt; cat /tmp/pkg_list.txt" OUTPUT_VARIABLE PKG_OUT)
-message(STATUS "DEBUG PKG_CONFIG WEB: ${PKG_OUT}")
-execute_process(COMMAND sh -c "pkg-config --list-all | grep -i ewk > /tmp/pkg_ewk.txt; cat /tmp/pkg_ewk.txt" OUTPUT_VARIABLE PKG_OUT2)
-message(STATUS "DEBUG PKG_CONFIG EWK: ${PKG_OUT2}")
+# Suppress GCC ARM false-positive warnings on 32-bit ARM
+IF(CMAKE_SYSTEM_PROCESSOR MATCHES "^arm")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-psabi -Wno-stringop-overread -Wno-stringop-overflow")
+ENDIF()
 
-pkg_check_modules(PKGS REQUIRED 
+## Paths
+SET(PREFIX ${CMAKE_INSTALL_PREFIX})
+SET(BINDIR "${PREFIX}/bin")
+
+## Target names
+SET(TARGET_WEBVIEW "tizenclaw-webview")
+
+## Find all needed packages once
+INCLUDE(FindPkgConfig)
+
+PKG_CHECK_MODULES(WEBVIEW_DEPS REQUIRED 
     elementary
     ecore
     ecore-evas
@@ -28,25 +36,25 @@ pkg_check_modules(PKGS REQUIRED
     dlog
 )
 
-include_directories(
-    inc
-    ${PKGS_INCLUDE_DIRS}
+ADD_EXECUTABLE(${TARGET_WEBVIEW} src/tizenclaw-webview.cpp)
+
+TARGET_INCLUDE_DIRECTORIES(${TARGET_WEBVIEW} PRIVATE 
+    src
+    ${WEBVIEW_DEPS_INCLUDE_DIRS}
 )
 
-link_directories(
-    ${PKGS_LIBRARY_DIRS}
+TARGET_LINK_DIRECTORIES(${TARGET_WEBVIEW} PRIVATE 
+    ${WEBVIEW_DEPS_LIBRARY_DIRS}
 )
 
-add_executable(tizenclaw-webview src/tizenclaw-webview.c)
-
-target_link_libraries(tizenclaw-webview
-    ${PKGS_LIBRARIES}
+TARGET_LINK_LIBRARIES(${TARGET_WEBVIEW} PRIVATE 
+    ${WEBVIEW_DEPS_LIBRARIES}
 )
 
 # Install executable to /usr/apps
-install(TARGETS tizenclaw-webview
+INSTALL(TARGETS ${TARGET_WEBVIEW}
         DESTINATION /usr/apps/org.tizen.tizenclew-webview/bin)
 
 # Install manifest XML to /usr/share/packages
-install(FILES packaging/org.tizen.tizenclew-webview.xml
+INSTALL(FILES packaging/org.tizen.tizenclew-webview.xml
         DESTINATION share/packages)

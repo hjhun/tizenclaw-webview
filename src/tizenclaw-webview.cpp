@@ -17,7 +17,7 @@ win_delete_request_cb(void *data, Evas_Object *obj, void *event_info)
 static void
 win_back_cb(void *data, Evas_Object *obj, void *event_info)
 {
-    appdata_s *ad = data;
+    appdata_s *ad = static_cast<appdata_s *>(data);
     if (ewk_view_back_possible(ad->web_view)) {
         ewk_view_back(ad->web_view);
     } else {
@@ -75,7 +75,7 @@ app_create(void *data)
        Initialize UI resources and application's data
        If this function returns true, the main loop of application starts
        If this function returns false, the application is terminated */
-    appdata_s *ad = data;
+    appdata_s *ad = static_cast<appdata_s *>(data);
     
     // Initialize ewebkit
     ewk_init();
@@ -90,7 +90,7 @@ app_control(app_control_h app_control, void *data)
 {
     /* Handle the launch request. */
     char *url = NULL;
-    appdata_s *ad = data;
+    appdata_s *ad = static_cast<appdata_s *>(data);
     
     if (app_control_get_extra_data(app_control, "url", &url) == APP_CONTROL_ERROR_NONE) {
         dlog_print(DLOG_INFO, LOG_TAG, "Received URL from app_control: %s", url);
@@ -107,7 +107,7 @@ static void
 app_pause(void *data)
 {
     /* Take necessary actions when application becomes invisible. */
-    appdata_s *ad = data;
+    appdata_s *ad = static_cast<appdata_s *>(data);
     if (ad->web_view) {
         ewk_view_suspend(ad->web_view);
     }
@@ -117,7 +117,7 @@ static void
 app_resume(void *data)
 {
     /* Take necessary actions when application becomes visible. */
-    appdata_s *ad = data;
+    appdata_s *ad = static_cast<appdata_s *>(data);
     if (ad->web_view) {
         ewk_view_resume(ad->web_view);
     }
@@ -169,11 +169,11 @@ ui_app_low_memory(app_event_info_h event_info, void *user_data)
 int
 main(int argc, char *argv[])
 {
-    appdata_s ad = {0,};
+    appdata_s ad = {};
     int ret = 0;
 
-    ui_app_lifecycle_callback_s event_callback = {0,};
-    app_event_handler_h handlers[5] = {NULL, };
+    ui_app_lifecycle_callback_s event_callback = {};
+    app_event_handler_h handlers[5] = {nullptr, };
 
     event_callback.create = app_create;
     event_callback.terminate = app_terminate;
