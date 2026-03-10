@@ -43,9 +43,9 @@ target_link_libraries(tizenclaw-webview
     ${PKGS_LIBRARIES}
 )
 
-# Install executable to /usr/bin
+# Install executable to /usr/apps
 install(TARGETS tizenclaw-webview
-        DESTINATION bin)
+        DESTINATION /usr/apps/org.tizen.tizenclew-webview/bin)
 
 # Install manifest XML to /usr/share/packages
 install(FILES packaging/org.tizen.tizenclew-webview.xml

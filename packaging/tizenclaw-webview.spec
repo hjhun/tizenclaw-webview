@@ -37,5 +37,5 @@ rm -rf %{buildroot}
 %files
 %manifest packaging/tizenclaw-webview.manifest
 %defattr(-,root,root,-)
-%{_bindir}/tizenclaw-webview
+/usr/apps/org.tizen.tizenclew-webview/bin/tizenclaw-webview
 /usr/share/packages/org.tizen.tizenclew-webview.xml
