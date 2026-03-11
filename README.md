@@ -9,7 +9,7 @@ To build and run this application, you need the following environment set up:
 1. **Tizen Studio & Platform Tools**
    - Install the Tizen Studio.
    - Ensure you have the Tizen 10.0+ platform headers and libraries.
-2. **Gerrit Build System (GBS)**
+2. **Git Build System (GBS)**
    - Used for building the RPM package natively. Learn more at the [Tizen GBS Guide](https://docs.tizen.org/platform/developing/installing/).
 3. **Smart Development Bridge (sdb)**
    - Required to communicate with the Tizen device or emulator. Usually included in Tizen Studio platform tools.
